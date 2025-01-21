@@ -1,0 +1,19 @@
+{
+    "name": "natilosir/bot-sdk",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Natilos.ir",
+            "email": "info@natilos.ir"
+        }
+    ],
+    "require": {
+        "natilosir/jalali": "^1.0",
+        "natilosir/bot": "^1.0",
+        "natilosir/orm": "^1.0"
+    },
+    "config": {
+        "vendor-dir": "./"
+    }
+}
