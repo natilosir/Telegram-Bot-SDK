@@ -115,8 +115,7 @@ Route::add('/send', 'user/send');     // This will open controller/user/send.php
 Route::def('default_message');        // Opens controller/default_message.php if no patterns match
 Route::handle($text); // Processes the user input
 ```
----
-## Bot Class
+# Bot Class
 ### HTTP request
 ```php     
      $data = [
