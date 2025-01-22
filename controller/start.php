@@ -3,28 +3,22 @@ use natilosir\bot\bot;
 use natilosir\orm\db; 
 
 $response = bot::row([
-    bot::column('خرید', 'dd'),
-])
-    ->row([
-        bot::column('فروش', 'dd'),
-    ])
-    ->row([
-        bot::column('اطلاعات حساب کاربری', 'dd'),
+        bot::column('Account Information', 'dd'),
 
     ])
     ->row([
-        bot::column('راهنما', 'dd'),
-        bot::column('تماس با ما', 'dd'),
+        bot::column('Help', 'dd'),
+        bot::column('Contact Us', 'dd'),
     ]);
 
-if ($text == 'بازگشت') {
-    $text = 'به منو اصلی بازگشتید.
+if ($text == 'Back') {
+    $text = 'You have returned to the main menu.
         
-از بین گزینه های زیر یکی را انتخاب کنید.';
+Please select one of the options below.';
 } else {
-    $text = 'لطفا از منو زیر یک گزینه را انتخاب کنید.';
+    $text = 'Please select an option from the menu below.';
 }
 
 $response = bot::keyboard($chatID, $text, $message_id);
 
-lg(db::table("users")->get());
+lg(db::table("users")->get()); // please check log.txt
