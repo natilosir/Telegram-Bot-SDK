@@ -115,9 +115,9 @@ Route::add('/send', 'user/send');     // This will open controller/user/send.php
 Route::def('default_message');        // Opens controller/default_message.php if no patterns match
 Route::handle($text); // Processes the user input
 ```
-
+---
 ## Bot Class
-- HTTP request
+### HTTP request
 ```php     
      $data = [
     'chat_id'    => $chatID,
@@ -125,54 +125,8 @@ Route::handle($text); // Processes the user input
 ];
 http('sendMessage', $data);
 ```
-     
-### `answerCallbackQuery`
-
-This method is used to send a response to a callback query received from a button press in a Telegram bot.
-
-#### Parameters
-
-- **`$query_id`**: The unique identifier for the callback query.
-- **`$text`**: The text message to be sent as a response.
-- **`$show_alert`**: (Optional) A boolean value indicating whether to show an alert instead of a notification. Default is `false`.
-
-#### Example Usage
-
-```php
-bot::answerCallbackQuery($query_id, "Your action was successful!", true);
-```
-
-## `sendChatAction`
-
-The `sendChatAction` method is used to send a chat action (like typing, uploading, etc.) to a specific chat.
-
-### Parameters
-
-- **`$chatID`** (int|string): The unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
-- **`$action`** (string): The action to be sent. Possible values are:
-  - `typing`
-  - `upload_photo`
-  - `record_video`
-  - `upload_video`
-  - `record_audio`
-  - `upload_audio`
-  - `upload_document`
-  - `find_location`
-  - `record_video_note`
-  - `upload_video_note`
-
-### Example
-
-```php
-// Define the chat ID and action
-$chatID = 123456789; // Target chat ID
-$action = 'typing'; // Action to be sent
-
-// Send the chat action
-$bot::sendChatAction($chatID, $action);
-```
-
-## `deleteMessage`
+---
+## `deleteMessage` Method
 
 The `deleteMessage` method allows you to delete a message from a chat.
 
@@ -191,7 +145,8 @@ $message_id = 42; // Message ID to be deleted
 // Use the deleteMessage method
 $bot::deleteMessage($chatID, $message_id);
 ```
-## `forwardMessage`
+---
+## `forwardMessage` Method
 
 The `forwardMessage` method allows you to forward a message from one chat to another.
 
@@ -212,6 +167,7 @@ $message_id = 42; // Message ID to be forwarded
 // Use the forwardMessage method
 $bot::forwardMessage($chatID, $from_chat_id, $message_id);
 ```
+---
 ## `sendMessage` Method
 
 The `sendMessage` method sends a text message to a specified chat.
@@ -233,8 +189,8 @@ $messageText = "Hello! How can I assist you today?";
 // Send a message to the chat
 $bot::sendMessage($chatID, $messageText);
 ```
-
-## `bot::copyMessage`
+---
+## `copyMessage` Method
 
 The `copyMessage` method allows you to copy a message from one chat to another in a Telegram bot.
 
@@ -264,17 +220,162 @@ $message_id = 42; // ID of the message to be copied
 // Use the copyMessage method
 bot::copyMessage($chatID, $from_chat_id, $message_id);
 ```
-- inline
+---
+## `inline` Method
+
+The `inline` method allows you to create inline keyboard buttons for your bot.
+
+### Parameters
+
+- **$text** (string): The text displayed on the button.
+- **$callback_data** (string|null): The data sent back to the bot when the button is pressed. This can be used to identify the button action.
+- **$url** (string|null): (Optional) A URL to be opened when the button is pressed. If this is provided, `callback_data` will be ignored.
+
+### Example
+
+Here is an example of how to use the `inline` method to create an inline keyboard with a button:
+
 ```php
-bot::copyMessage($chatID, $from_chat_id, $message_id);
+$response = Bot::row([
+    Bot::column('❓ What is this bot? What is it used for?', 'option_1'),
+    ])
+    ->row([
+        Bot::column('🔗 How do I connect to a random stranger?', 'option_2'),
+    ])
+    ->row([
+        Bot::column('💌 How do I connect to a specific contact?', 'option_3'),
+    ]);
+
+// Display the inline keyboard with the given helper text
+
+// Main message text with the quote formatted
+$text = "🔎just tap the desired button below👇🏻";
+
+// Send the message with reply
+$response = Bot::inline($chatID, $text, $message_id);
 ```
-- keyboard
+---
+## `keyboard` Method
+
+The `keyboard` method allows you to create a custom keyboard layout for your bot's messages.
+
+### Parameters
+
+- **$chatID** (int): The unique identifier for the target chat where the keyboard will be sent.
+- **$text** (string): The text message to accompany the keyboard.
+- **$reply_markup** (array|null): (Optional) An array defining the keyboard layout. If not provided, a default keyboard will be used.
+
+### Example
+
 ```php
-bot::copyMessage($chatID, $from_chat_id, $message_id);
+$response = bot::row([
+        bot::column('Account Information', 'dd'),
+
+    ])
+    ->row([
+        bot::column('Help', 'dd'),
+        bot::column('Contact Us', 'dd'),
+    ]);
+
+if ($text == 'Back') {
+    $text = 'You have returned to the main menu.
+        
+Please select one of the options below.';
+} else {
+    $text = 'Please select an option from the menu below.';
+}
+
+$response = bot::keyboard($chatID, $text, $message_id);
 ```
-- editMessageReplyMarkup
+---
+## `editMessageReplyMarkup` Method
+
+The `editMessageReplyMarkup` method is used to edit the reply markup of a message sent by the bot.
+
+### Parameters
+
+- **`chat_id`**: (integer|string) Unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
+- **`message_id`**: (integer) Identifier of the message to edit.
+- **`reply_markup`**: (array|null) A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard, or to force a reply from the user.
+
+### Example
+
 ```php
-bot::copyMessage($chatID, $from_chat_id, $message_id);
+Bot::row([
+    Bot::column('🔓 Unblock', 'unblock' . $message_id_from_callback),
+    Bot::column('✍ Reply', 'reply' . $message_id_from_callback),
+])->row([
+    Bot::column('🚫 Report User', 'report' . $message_id_from_callback),
+]);
+
+Bot::alert($query_id, '🚫 Blocked!');
+
+Bot::inline($chatID, null, $message_id, 'edit');
 ```
-- column
-       - row
+---
+### `answerCallbackQuery` Method
+
+This method is used to send a response to a callback query received from a button press in a Telegram bot.
+
+#### Parameters
+
+- **`$query_id`**: The unique identifier for the callback query.
+- **`$text`**: The text message to be sent as a response.
+- **`$show_alert`**: (Optional) A boolean value indicating whether to show an alert instead of a notification. Default is `false`.
+
+#### Example Usage
+
+```php
+bot::answerCallbackQuery($query_id, "Your action was successful!", true);
+```
+---
+## `alert` Method
+
+The `alert` method is used to send an alert to the user in response to a callback query.
+
+### Parameters
+
+- **`$query_id`**: (string) The unique identifier for the callback query.
+- **`$text`**: (string) The text of the alert message to be displayed.
+- **`$show_alert`**: (bool, optional) Determines whether to show the alert as a modal dialog. Default is `false`.
+
+### Example
+
+```php
+// Define the query ID and the message text
+$query_id = '1234567890';
+$message_text = 'This is an alert message!';
+
+// Send an alert to the user
+$bot::alert($query_id, $message_text, true);
+```
+---
+## `sendChatAction` Method
+
+The `sendChatAction` method is used to send a chat action (like typing, uploading, etc.) to a specific chat.
+
+### Parameters
+
+- **`$chatID`** (int|string): The unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
+- **`$action`** (string): The action to be sent. Possible values are:
+  - `typing`
+  - `upload_photo`
+  - `record_video`
+  - `upload_video`
+  - `record_audio`
+  - `upload_audio`
+  - `upload_document`
+  - `find_location`
+  - `record_video_note`
+  - `upload_video_note`
+
+### Example
+
+```php
+// Define the chat ID and action
+$chatID = 123456789; // Target chat ID
+$action = 'typing'; // Action to be sent
+
+// Send the chat action
+$bot::sendChatAction($chatID, $action);
+```
