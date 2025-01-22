@@ -36,4 +36,23 @@ if ($message) {
 }
     require_once "route.php";
 
+
+
+    
+    $callbackQuery = $data->callback_query;
+    if ($callbackQuery) {
+        $query_id      = $callbackQuery->id;
+        $callbackData  = $callbackQuery->data;
+        $chatID        = $callbackQuery->message->chat->id;
+        $message_id    = $callbackQuery->message->message_id;
+        $fromID        = $callbackQuery->from->id;
+        $firstName     = $callbackQuery->from->first_name;
+        $lastName      = isset($callbackQuery->from->last_name) ? $callbackQuery->from->last_name : null;
+        $username      = isset($callbackQuery->from->username) ? $callbackQuery->from->username : null;
+    }
+    
+
+require_once "callback.php";
+
+
 processLogFile();
