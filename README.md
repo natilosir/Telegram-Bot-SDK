@@ -11,5 +11,5 @@ A professional SDK BOT Telegram for PHP
 You can install this SDK package via Composer:
 
 ```bash
-composer require natilosir/ORM
+composer require natilosir/Telegram-Bot-SDK
 ```
