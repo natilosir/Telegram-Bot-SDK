@@ -15,7 +15,6 @@
     },
     "config": {
         "optimize-autoloader": true,
-        "preferred-install": "source", // این خط را اضافه یا ویرایش کنید
-
+        "preferred-install": "source"
     }
 }
