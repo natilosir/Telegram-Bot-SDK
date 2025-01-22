@@ -13,7 +13,7 @@ return [
     */
 
     'bot' => [
-        'token' => 'tiken', 
+        'token' => 'token_code', 
     ],
 
     /*
