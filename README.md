@@ -116,16 +116,165 @@ Route::def('default_message');        // Opens controller/default_message.php if
 Route::handle($text); // Processes the user input
 ```
 
-### Object Method api telegram
-   - HTTP request
-   - answerCallbackQuery
-   - sendChatAction
-   - deleteMessage
-   - forwardMessage
-   - sendMessage
-   - copyMessage
-     - inline
-     - keyboard
-       - editMessageReplyMarkup
-       - column
+## Bot Class
+- HTTP request
+```php     
+     $data = [
+    'chat_id'    => $chatID,
+    'text'       => $text,
+];
+http('sendMessage', $data);
+```
+     
+### `answerCallbackQuery`
+
+This method is used to send a response to a callback query received from a button press in a Telegram bot.
+
+#### Parameters
+
+- **`$query_id`**: The unique identifier for the callback query.
+- **`$text`**: The text message to be sent as a response.
+- **`$show_alert`**: (Optional) A boolean value indicating whether to show an alert instead of a notification. Default is `false`.
+
+#### Example Usage
+
+```php
+bot::answerCallbackQuery($query_id, "Your action was successful!", true);
+```
+
+## `sendChatAction`
+
+The `sendChatAction` method is used to send a chat action (like typing, uploading, etc.) to a specific chat.
+
+### Parameters
+
+- **`$chatID`** (int|string): The unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
+- **`$action`** (string): The action to be sent. Possible values are:
+  - `typing`
+  - `upload_photo`
+  - `record_video`
+  - `upload_video`
+  - `record_audio`
+  - `upload_audio`
+  - `upload_document`
+  - `find_location`
+  - `record_video_note`
+  - `upload_video_note`
+
+### Example
+
+```php
+// Define the chat ID and action
+$chatID = 123456789; // Target chat ID
+$action = 'typing'; // Action to be sent
+
+// Send the chat action
+$bot::sendChatAction($chatID, $action);
+```
+
+## `deleteMessage`
+
+The `deleteMessage` method allows you to delete a message from a chat.
+
+### Parameters
+
+- **`$chatID`** (int): The unique identifier for the target chat.
+- **`$message_id`** (int): The unique identifier for the message to be deleted.
+
+### Example
+
+```php
+// Define chat ID and message ID
+$chatID = 123456789; // Target chat ID
+$message_id = 42; // Message ID to be deleted
+
+// Use the deleteMessage method
+$bot::deleteMessage($chatID, $message_id);
+```
+## `forwardMessage`
+
+The `forwardMessage` method allows you to forward a message from one chat to another.
+
+### Parameters
+
+- **`$chatID`** (int): The ID of the chat where the message will be forwarded.
+- **`$from_chat_id`** (int): The ID of the chat from which the message is being forwarded.
+- **`$message_id`** (int): The ID of the message to be forwarded.
+
+### Example Usage
+
+```php
+// Define chat IDs and message ID
+$chatID = 123456789; // Destination chat ID
+$from_chat_id = 987654321; // Source chat ID
+$message_id = 42; // Message ID to be forwarded
+
+// Use the forwardMessage method
+$bot::forwardMessage($chatID, $from_chat_id, $message_id);
+```
+## `sendMessage` Method
+
+The `sendMessage` method sends a text message to a specified chat.
+
+### Parameters
+
+- **`$chatID`** (int): The unique identifier for the target chat.
+- **`$text`** (string): The text of the message to be sent.
+- **`$reply_to_message_id`** (int, optional): If the message is a reply, ID of the original message.
+- **`$reply_markup`** (array, optional): Additional interface options, such as inline keyboard.
+
+### Example
+
+```php
+// Define the chat ID and message text
+$chatID = 123456789; // The target chat ID
+$messageText = "Hello! How can I assist you today?";
+
+// Send a message to the chat
+$bot::sendMessage($chatID, $messageText);
+```
+
+## `bot::copyMessage`
+
+The `copyMessage` method allows you to copy a message from one chat to another in a Telegram bot.
+
+### Parameters
+
+- **`$chatID`** (int): The ID of the chat where the message will be sent.
+- **`$second_chat_id`** (int): The ID of the chat from which the message will be copied.
+- **`$message_id`** (int): The ID of the message that needs to be copied.
+- **`$reply_markup`** (array|null, optional): Optional. Additional reply markup for the copied message.
+
+### Example
+
+```php
+<?php
+namespace natilosir\bot;
+
+require_once "http.php"; // Load the http.php file
+
+// Create an instance of the bot class
+$bot = new bot();
+
+// Define chat IDs and message ID
+$chatID = 123456789; // Destination chat ID
+$from_chat_id = 987654321; // Source chat ID
+$message_id = 42; // ID of the message to be copied
+
+// Use the copyMessage method
+bot::copyMessage($chatID, $from_chat_id, $message_id);
+```
+- inline
+```php
+bot::copyMessage($chatID, $from_chat_id, $message_id);
+```
+- keyboard
+```php
+bot::copyMessage($chatID, $from_chat_id, $message_id);
+```
+- editMessageReplyMarkup
+```php
+bot::copyMessage($chatID, $from_chat_id, $message_id);
+```
+- column
        - row
