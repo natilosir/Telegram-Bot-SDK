@@ -13,7 +13,12 @@
         "natilosir/bot": "^1.0",
         "natilosir/orm": "^1.0"
     },
-    "config": {
-        "vendor-dir": "./"
+    "scripts": {
+        "post-install-cmd": [
+            "cp -r vendor/natilosir/telegram-bot-sdk/* ./"
+        ],
+        "post-update-cmd": [
+            "cp -r vendor/natilosir/telegram-bot-sdk/* ./"
+        ]
     }
 }
