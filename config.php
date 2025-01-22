@@ -13,7 +13,7 @@ return [
     */
 
     'bot' => [
-        'token' => '6488319835:AAFkHeSJqIvkSr4nscbY6_0WVrVjACXnC58', 
+        'token' => 'tiken', 
     ],
 
     /*
@@ -29,9 +29,9 @@ return [
 
     'database' => [
         'host' => 'localhost',
-        'user' => 'natilosi_tbot',
-        'database' => 'natilosi_tbot',
-        'password' => 'qwQW12',
+        'user' => 'root',
+        'database' => 'natilos',
+        'password' => '',
     ],
 
 ];
