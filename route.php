@@ -1,6 +1,6 @@
 <?php
 
-use Natilosir\bot\Route; 
+use natilosir\bot\Route; 
 
 /*
 |--------------------------------------------------------------
