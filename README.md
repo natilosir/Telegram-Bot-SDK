@@ -12,4 +12,5 @@ You can install this SDK package via Composer:
 
 ```bash
 composer require natilosir/Telegram-Bot-SDK
+php vendor/natilosir/bot/install.php
 ```
