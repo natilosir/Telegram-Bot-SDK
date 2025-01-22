@@ -31,7 +31,7 @@ php vendor/natilosir/bot/install.php
 
 ### [Error log](https://github.com/natilosir/BOT/blob/main/log.txt) 
 - Advanced error management and storing logs in a separate file `log.txt` for every request to the server.
-# Route Class
+# Route::Class
 Please provide the code you would like me to review.
 ```php
 use natilosir\bot\Route; 
@@ -115,7 +115,7 @@ Route::add('/send', 'user/send');     // This will open controller/user/send.php
 Route::def('default_message');        // Opens controller/default_message.php if no patterns match
 Route::handle($text); // Processes the user input
 ```
-# Bot Class
+# Bot::Class
 ### HTTP request
 ```php     
      $data = [
