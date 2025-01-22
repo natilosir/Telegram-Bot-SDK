@@ -12,13 +12,5 @@
         "natilosir/jalali": "^1.0",
         "natilosir/bot": "^1.0",
         "natilosir/orm": "^1.0"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "php vendor/natilosir/bot/install.php"
-        ],
-        "post-update-cmd": [
-            "php vendor/natilosir/bot/install.php"
-        ]
     }
 }
