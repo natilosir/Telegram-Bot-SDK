@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php $get=$_GET['file'];
-                    if($get){$info=pathinfo($_GET['file'])['filename'];}else{$info='save text';}
+                    if($get){$info=pathinfo($_GET['file'])['filename'];}else{$info='Code Editor';}
                     echo strtoupper($info); ?></title>
     <style>
 @font-face {
