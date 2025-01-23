@@ -29,17 +29,36 @@ php vendor/natilosir/bot/install.php
   - [JSON](https://github.com/natilosir/ORM#JSON)
   - [query](https://github.com/natilosir/ORM#query)
 
-### [Error log](https://github.com/natilosir/BOT/blob/main/log.txt) 
+## [Error log](https://github.com/natilosir/BOT/blob/main/log.txt) 
 - Advanced error management and storing logs in a separate file `log.txt` for every request to the server.
+# `Editor.php`
+
+### Overview
+`Editor.php` is an online code editor that allows users to edit files in a manner similar to Visual Studio Code (VSCode). It provides a user-friendly interface for managing and editing code files directly from your web browser.
+
+## Opening Files
+By default, the editor opens the file `route.php`. If you want to open other files, you can do so by appending the file path to the URL, like this:
+```bash
+editor.php?file=controller/start.php
+```
+## Handling Unsaved Files
+If you encounter an "Error opening file" message when trying to open a file that has not been saved previously, please press `Ctrl + S`. This action will create a new file and automatically save it.
+
+## Saving Files
+To save your changes, you can click the purple "Save" button located in the top right corner of the editor (for mobile users). Alternatively, you can use the keyboard shortcut `Ctrl + S` to save the file quickly.
+
+## Features
+- User-friendly interface `android` `windows`
+- Supports multiple file editing `php` `js` `html` `css` etc...
+- Keyboard shortcuts for efficiency `Ctrl + S`
+
 # Route::Class
 Please provide the code you would like me to review.
 ```php
 use natilosir\bot\Route; 
-Route::add(['/start', 'بازگشت', 'انصراف'], 'start')
-    // Add route for the purchase command
-    ->add('خرید', 'buy')
-    // Add route for the sale command
-    ->add('فروش', 'sell');
+Route::add(['/start', 'Back'], 'start')
+    ->add('purchase', 'buy')        // Add route for the purchase command
+    ->add('sale', 'sell');          // Add route for the sale command
 
 // Define the default file to handle the start command
 Route::def('start'); // Default file
@@ -52,7 +71,7 @@ Now we will review all sections of the code. To use this class, make sure to inc
 ### add Method Overview
 
 ```php
-Route::add(['/start', 'بازگشت', 'انصراف'], 'start')
+Route::add(['/start', 'Back'], 'start')
 ```
 
 This method accepts two parameters: `patterns` and `action`.
@@ -113,12 +132,12 @@ Route::add('/start', 'start');        // This will open controller/start.php whe
 Route::add('/send', 'user/send');     // This will open controller/user/send.php when /send is triggered.
 
 Route::def('default_message');        // Opens controller/default_message.php if no patterns match
-Route::handle($text); // Processes the user input
+Route::handle($text);                 // Processes the user input
 ```
 # Bot::Class
-### HTTP request
+## HTTP request
 ```php     
-     $data = [
+$data = [
     'chat_id'    => $chatID,
     'text'       => $text,
 ];
@@ -131,15 +150,15 @@ The `deleteMessage` method allows you to delete a message from a chat.
 
 ### Parameters
 
-- **`$chatID`** (int): The unique identifier for the target chat.
+- **`$chatID`**     (int): The unique identifier for the target chat.
 - **`$message_id`** (int): The unique identifier for the message to be deleted.
 
 ### Example
 
 ```php
 // Define chat ID and message ID
-$chatID = 123456789; // Target chat ID
-$message_id = 42; // Message ID to be deleted
+$chatID     = 123456789; // Target chat ID
+$message_id = 42;        // Message ID to be deleted
 
 // Use the deleteMessage method
 $bot::deleteMessage($chatID, $message_id);
@@ -151,17 +170,17 @@ The `forwardMessage` method allows you to forward a message from one chat to ano
 
 ### Parameters
 
-- **`$chatID`** (int): The ID of the chat where the message will be forwarded.
+- **`$chatID`**       (int): The ID of the chat where the message will be forwarded.
 - **`$from_chat_id`** (int): The ID of the chat from which the message is being forwarded.
-- **`$message_id`** (int): The ID of the message to be forwarded.
+- **`$message_id`**   (int): The ID of the message to be forwarded.
 
 ### Example Usage
 
 ```php
 // Define chat IDs and message ID
-$chatID = 123456789; // Destination chat ID
+$chatID       = 123456789; // Destination chat ID
 $from_chat_id = 987654321; // Source chat ID
-$message_id = 42; // Message ID to be forwarded
+$message_id   = 42;        // Message ID to be forwarded
 
 // Use the forwardMessage method
 $bot::forwardMessage($chatID, $from_chat_id, $message_id);
@@ -173,16 +192,16 @@ The `sendMessage` method sends a text message to a specified chat.
 
 ### Parameters
 
-- **`$chatID`** (int): The unique identifier for the target chat.
-- **`$text`** (string): The text of the message to be sent.
+- **`$chatID`**              (int): The unique identifier for the target chat.
+- **`$text`**                (string): The text of the message to be sent.
 - **`$reply_to_message_id`** (int, optional): If the message is a reply, ID of the original message.
-- **`$reply_markup`** (array, optional): Additional interface options, such as inline keyboard.
+- **`$reply_markup`**        (array, optional): Additional interface options, such as inline keyboard.
 
 ### Example
 
 ```php
 // Define the chat ID and message text
-$chatID = 123456789; // The target chat ID
+$chatID      = 123456789; // The target chat ID
 $messageText = "Hello! How can I assist you today?";
 
 // Send a message to the chat
@@ -195,26 +214,21 @@ The `copyMessage` method allows you to copy a message from one chat to another i
 
 ### Parameters
 
-- **`$chatID`** (int): The ID of the chat where the message will be sent.
+- **`$chatID`**         (int): The ID of the chat where the message will be sent.
 - **`$second_chat_id`** (int): The ID of the chat from which the message will be copied.
-- **`$message_id`** (int): The ID of the message that needs to be copied.
-- **`$reply_markup`** (array|null, optional): Optional. Additional reply markup for the copied message.
+- **`$message_id`**     (int): The ID of the message that needs to be copied.
+- **`$reply_markup`**   (array|null, optional): Optional. Additional reply markup for the copied message.
 
 ### Example
 
 ```php
 <?php
-namespace natilosir\bot;
-
-require_once "http.php"; // Load the http.php file
-
-// Create an instance of the bot class
-$bot = new bot();
+namespace natilosir\bot\bot;
 
 // Define chat IDs and message ID
-$chatID = 123456789; // Destination chat ID
+$chatID       = 123456789; // Destination chat ID
 $from_chat_id = 987654321; // Source chat ID
-$message_id = 42; // ID of the message to be copied
+$message_id   = 42;        // ID of the message to be copied
 
 // Use the copyMessage method
 bot::copyMessage($chatID, $from_chat_id, $message_id);
@@ -226,9 +240,9 @@ The `inline` method allows you to create inline keyboard buttons for your bot.
 
 ### Parameters
 
-- **$text** (string): The text displayed on the button.
+- **$text**          (string): The text displayed on the button.
 - **$callback_data** (string|null): The data sent back to the bot when the button is pressed. This can be used to identify the button action.
-- **$url** (string|null): (Optional) A URL to be opened when the button is pressed. If this is provided, `callback_data` will be ignored.
+- **$url**           (string|null): (Optional) A URL to be opened when the button is pressed. If this is provided, `callback_data` will be ignored.
 
 ### Example
 
@@ -260,20 +274,20 @@ The `keyboard` method allows you to create a custom keyboard layout for your bot
 
 ### Parameters
 
-- **$chatID** (int): The unique identifier for the target chat where the keyboard will be sent.
-- **$text** (string): The text message to accompany the keyboard.
+- **$chatID**       (int): The unique identifier for the target chat where the keyboard will be sent.
+- **$text**         (string): The text message to accompany the keyboard.
 - **$reply_markup** (array|null): (Optional) An array defining the keyboard layout. If not provided, a default keyboard will be used.
 
 ### Example
 
 ```php
 $response = bot::row([
-        bot::column('Account Information', 'dd'),
+        bot::column('Account Information'),
 
     ])
     ->row([
-        bot::column('Help', 'dd'),
-        bot::column('Contact Us', 'dd'),
+        bot::column('Help'),
+        bot::column('Contact Us'),
     ]);
 
 if ($text == 'Back') {
@@ -293,8 +307,8 @@ The `editMessageReplyMarkup` method is used to edit the reply markup of a messag
 
 ### Parameters
 
-- **`chat_id`**: (integer|string) Unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
-- **`message_id`**: (integer) Identifier of the message to edit.
+- **`chat_id`**:      (integer|string) Unique identifier for the target chat or username of the target channel (in the format `@channelusername`).
+- **`message_id`**:   (integer) Identifier of the message to edit.
 - **`reply_markup`**: (array|null) A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard, or to force a reply from the user.
 
 ### Example
@@ -318,8 +332,8 @@ This method is used to send a response to a callback query received from a butto
 
 #### Parameters
 
-- **`$query_id`**: The unique identifier for the callback query.
-- **`$text`**: The text message to be sent as a response.
+- **`$query_id`**:   The unique identifier for the callback query.
+- **`$text`**:       The text message to be sent as a response.
 - **`$show_alert`**: (Optional) A boolean value indicating whether to show an alert instead of a notification. Default is `false`.
 
 #### Example Usage
@@ -334,15 +348,15 @@ The `alert` method is used to send an alert to the user in response to a callbac
 
 ### Parameters
 
-- **`$query_id`**: (string) The unique identifier for the callback query.
-- **`$text`**: (string) The text of the alert message to be displayed.
+- **`$query_id`**:   (string) The unique identifier for the callback query.
+- **`$text`**:       (string) The text of the alert message to be displayed.
 - **`$show_alert`**: (bool, optional) Determines whether to show the alert as a modal dialog. Default is `false`.
 
 ### Example
 
 ```php
 // Define the query ID and the message text
-$query_id = '1234567890';
+$query_id     = '1234567890';
 $message_text = 'This is an alert message!';
 
 // Send an alert to the user
@@ -373,7 +387,7 @@ The `sendChatAction` method is used to send a chat action (like typing, uploadin
 ```php
 // Define the chat ID and action
 $chatID = 123456789; // Target chat ID
-$action = 'typing'; // Action to be sent
+$action = 'typing';  // Action to be sent
 
 // Send the chat action
 $bot::sendChatAction($chatID, $action);
