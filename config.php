@@ -13,7 +13,7 @@ return [
     */
 
     'bot' => [
-        'token' => 'token_code', 
+        'token' => 'token_code',
     ],
 
     /*
@@ -28,8 +28,8 @@ return [
     */
 
     'database' => [
-        'host' => 'localhost',
-        'user' => 'root',
+        'host'     => 'localhost',
+        'user'     => 'root',
         'database' => 'natilos',
         'password' => '',
     ],

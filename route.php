@@ -1,6 +1,6 @@
 <?php
 
-use natilosir\bot\Route; 
+use natilosir\bot\Route;
 
 /*
 |--------------------------------------------------------------
@@ -9,7 +9,7 @@ use natilosir\bot\Route;
 | This section defines the routes.
 */
 
-// Add routes for the start 
+// Add routes for the start
 Route::add(['/start', 'بازگشت', 'انصراف'], 'start')
     // Add route for the purchase command
     ->add('خرید', 'buy')
@@ -21,10 +21,6 @@ Route::def('start'); // Default file
 
 // Handle the input text from the user
 Route::handle($text); // Process the incoming text
-
-
-
-
 
 /*
 |--------------------------------------------------------------

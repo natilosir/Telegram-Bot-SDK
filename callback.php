@@ -1,6 +1,6 @@
 <?php
 
-use natilosir\bot\Route; 
+use natilosir\bot\Route;
 
 /*
 |--------------------------------------------------------------
@@ -9,7 +9,7 @@ use natilosir\bot\Route;
 | This section defines the callbacks.
 */
 
-// Add callbacks for the start 
+// Add callbacks for the start
 Route::add(['dd', 'بازگشت', 'انصراف'], 'start');
 
 // Define the default file to handle the start command
@@ -17,10 +17,6 @@ Route::def('start'); // Default file
 
 // Handle the input text from the user
 Route::handle($callbackData); // Process the incoming text
-
-
-
-
 
 /*
 |--------------------------------------------------------------

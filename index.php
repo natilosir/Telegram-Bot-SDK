@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 /*
 ===============================================================================
 ===============================================================================
@@ -13,7 +10,7 @@
                        ⚠️  IMPORTANT NOTICE ⚠️
 
     This file is critical for the operation of the application.
-    Any modifications may lead to unexpected behavior or 
+    Any modifications may lead to unexpected behavior or
     system failures. Please proceed with caution!
 
 ===============================================================================
@@ -25,7 +22,7 @@ To connect the Telegram webhook using the API, follow these steps:
 1. Open your Telegram app and search for the BotFather.
 2. Start a chat with BotFather and create a new bot using the command `/newbot`.
 3. After creating your bot, you will receive a token. Copy this token.
-4. Make a POST request to the Telegram API to set your webhook. 
+4. Make a POST request to the Telegram API to set your webhook.
    POST https://api.telegram.org/bot<YourWebhookURL>/setWebhook?url=<YourUrl>
    Replace `<YourBotToken>` with your bot token and `<YourWebhookURL>` with the URL of this file.
 
@@ -40,18 +37,18 @@ To connect the Telegram webhook using the API, follow these steps:
 
 
 
-require __DIR__ . '/vendor/autoload.php';
 
 
 
 
 
 
+require __DIR__.'/vendor/autoload.php';
 
-require __DIR__ . '/vendor/natilosir/bot/src/log.php';
+require __DIR__.'/vendor/natilosir/bot/src/log.php';
 setupErrorHandling();
 
-$data = json_decode(file_get_contents('php://input'));
+$data    = json_decode(file_get_contents('php://input'));
 $message = $data->message;
 if ($message) {
     $text       = $message->text;
@@ -63,23 +60,19 @@ if ($message) {
     $date       = $message->date;
     $message_id = $message->message_id;
 }
-require_once "route.php";
+require_once 'route.php';
 
-
-
-    
 $callbackQuery = $data->callback_query;
 if ($callbackQuery) {
-    $query_id      = $callbackQuery->id;
-    $callbackData  = $callbackQuery->data;
-    $chatID        = $callbackQuery->message->chat->id;
-    $message_id    = $callbackQuery->message->message_id;
-    $fromID        = $callbackQuery->from->id;
-    $firstName     = $callbackQuery->from->first_name;
-    $lastName      = isset($callbackQuery->from->last_name) ? $callbackQuery->from->last_name : null;
-    $username      = isset($callbackQuery->from->username) ? $callbackQuery->from->username : null;
+    $query_id     = $callbackQuery->id;
+    $callbackData = $callbackQuery->data;
+    $chatID       = $callbackQuery->message->chat->id;
+    $message_id   = $callbackQuery->message->message_id;
+    $fromID       = $callbackQuery->from->id;
+    $firstName    = $callbackQuery->from->first_name;
+    $lastName     = isset($callbackQuery->from->last_name) ? $callbackQuery->from->last_name : null;
+    $username     = isset($callbackQuery->from->username) ? $callbackQuery->from->username : null;
 }
-require_once "callback.php";
-
+require_once 'callback.php';
 
 processLogFile();

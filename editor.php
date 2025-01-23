@@ -3,9 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php $get=$_GET['file'];
-                    if($get){$info=pathinfo($_GET['file'])['filename'];}else{$info='Code Editor';}
-                    echo strtoupper($info); ?></title>
+    <title><?php $get = $_GET['file'];
+    if ($get) {
+        $info = pathinfo($_GET['file'])['filename'];
+    } else {
+        $info = 'save text';
+    }
+    echo strtoupper($info); ?></title>
     <style>
 @font-face {
     font-family: 'FiraCode';
@@ -111,12 +115,18 @@ html, body {
         // ایجاد ویرایشگر
   require(['vs/editor/editor.main'], function() {
             editor = monaco.editor.create(document.getElementById('editor-container'), {
-                language: '<?php 
+                language: '<?php
                 error_reporting(0);
-                $get=$_GET['file'];
-                    if($get){$info=pathinfo($_GET['file'])['extension'];}else{$info='php';}
-                    if($info=="js"){$info="javascript";}
-                    echo $info; ?>', // زبان کدنویسی
+    $get = $_GET['file'];
+    if ($get) {
+        $info = pathinfo($_GET['file'])['extension'];
+    } else {
+        $info = 'php';
+    }
+    if ($info == 'js') {
+        $info = 'javascript';
+    }
+    echo $info; ?>', // زبان کدنویسی
                     theme: "vs-dark",
                         fontFamily: "FiraCode", 
                             fontSize: 11.9, 
