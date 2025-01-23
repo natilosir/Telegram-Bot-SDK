@@ -7,7 +7,7 @@
     if ($get) {
         $info = pathinfo($_GET['file'])['filename'];
     } else {
-        $info = 'save text';
+        $info = 'route editor';
     }
     echo strtoupper($info); ?></title>
     <style>
