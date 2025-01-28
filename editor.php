@@ -155,7 +155,8 @@ li a:hover {
 function getUrl() {
     const currentUrl = window.location.href; 
     const parsedUrl = new URL(currentUrl); 
-    return parsedUrl.searchParams.get("file"); 
+    const fileParam = parsedUrl.searchParams.get("file"); 
+    return fileParam !== null ? fileParam : ''; 
 }
 function loadFolders(folder) {
     $.ajax({
