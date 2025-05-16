@@ -161,7 +161,7 @@ $chatID     = 123456789; // Target chat ID
 $message_id = 42;        // Message ID to be deleted
 
 // Use the deleteMessage method
-$bot::deleteMessage($chatID, $message_id);
+bot::deleteMessage($chatID, $message_id);
 ```
 ---
 ## `forwardMessage` Method
@@ -183,7 +183,7 @@ $from_chat_id = 987654321; // Source chat ID
 $message_id   = 42;        // Message ID to be forwarded
 
 // Use the forwardMessage method
-$bot::forwardMessage($chatID, $from_chat_id, $message_id);
+bot::forwardMessage($chatID, $from_chat_id, $message_id);
 ```
 ---
 ## `sendMessage` Method
@@ -205,7 +205,7 @@ $chatID      = 123456789; // The target chat ID
 $messageText = "Hello! How can I assist you today?";
 
 // Send a message to the chat
-$bot::sendMessage($chatID, $messageText);
+bot::sendMessage($chatID, $messageText);
 ```
 ---
 ## `copyMessage` Method
@@ -360,7 +360,7 @@ $query_id     = '1234567890';
 $message_text = 'This is an alert message!';
 
 // Send an alert to the user
-$bot::alert($query_id, $message_text, true);
+bot::alert($query_id, $message_text, true);
 ```
 ---
 ## `sendChatAction` Method
@@ -390,5 +390,5 @@ $chatID = 123456789; // Target chat ID
 $action = 'typing';  // Action to be sent
 
 // Send the chat action
-$bot::sendChatAction($chatID, $action);
+bot::sendChatAction($chatID, $action);
 ```
