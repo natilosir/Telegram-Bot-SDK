@@ -31,48 +31,11 @@ To connect the Telegram webhook using the API, follow these steps:
 ===============================================================================
 */
 
+use natilosir\bot\Route;
 
+require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/vendor/natilosir/bot/src/log.php';
 
+require_once 'Router/route.php';
+Route::init();
 
-
-
-
-
-
-
-
-
-
-require __DIR__.'/vendor/autoload.php';
-
-require __DIR__.'/vendor/natilosir/bot/src/log.php';
-setupErrorHandling();
-
-$data    = json_decode(file_get_contents('php://input'));
-$message = $data->message;
-if ($message) {
-    $text       = $message->text;
-    $chatID     = $message->chat->id;
-    $fromID     = $message->from->id;
-    $firstName  = $message->from->first_name;
-    $lastName   = $message->from->last_name;
-    $username   = $message->from->username;
-    $date       = $message->date;
-    $message_id = $message->message_id;
-}
-require_once 'route.php';
-
-$callbackQuery = $data->callback_query;
-if ($callbackQuery) {
-    $query_id     = $callbackQuery->id;
-    $callbackData = $callbackQuery->data;
-    $chatID       = $callbackQuery->message->chat->id;
-    $message_id   = $callbackQuery->message->message_id;
-    $fromID       = $callbackQuery->from->id;
-    $firstName    = $callbackQuery->from->first_name;
-    $lastName     = isset($callbackQuery->from->last_name) ? $callbackQuery->from->last_name : null;
-    $username     = isset($callbackQuery->from->username) ? $callbackQuery->from->username : null;
-}
-require_once 'callback.php';
-
-processLogFile();
