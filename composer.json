@@ -9,6 +9,7 @@
     }
   ],
   "require": {
+    "php": ">=8.0",
     "natilosir/jalali": "^1.0",
     "natilosir/bot": "^1.0",
     "natilosir/orm": "^1.0"
