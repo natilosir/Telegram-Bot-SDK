@@ -329,7 +329,7 @@ Your request must include:
 
 A `route` field specifying the action (e.g., `sendMessage`)
 A `data` object containing the required parameters for that route
-**Example (using Laravel `HTTP` client):**
+- **Example (using Laravel `HTTP` client):**
 
 ```php
 use Illuminate\Support\Facades\Http;
@@ -355,8 +355,8 @@ public function sendMessage( Request $request ) {
 }
 ```
 **Notes**
-The request must be sent as JSON (`Content-Type: application/json`).
-Replace `sendMessage` and `chat_id` and `text` with your actual values.
+- The request must be sent as JSON (`Content-Type: application/json`).
+- Replace `sendMessage` and `chat_id` and `text` with your actual values.
 
 
 
