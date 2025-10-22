@@ -321,7 +321,7 @@ class StartController {
 - `new_chat_member`: The updated chat member state.
 - `invite_link`: The invite link used for chat join requests.
 
-### Sending a request via laravel to bot
+## Sending a request via laravel to bot
 To send a request using the bot endpoint, make a POST request to Webhook URL with a JSON payload
 #### Request Format
 
@@ -335,14 +335,14 @@ A `data` object containing the required parameters for that route
 use Illuminate\Support\Facades\Http;
 
 $response = Http::timeout(10)
-->asJson()
-->post("https://Webhook.com", [
-'route' => 'sendMessage',
-'data'  => [
-'chat_id' => 123456789,
-'text'    => 'Hello from your bot!',
-],
-]);
+        ->asJson()
+        ->post("https://Webhook.com", [
+            'route' => 'sendMessage',
+            'data'  => [
+                'chat_id' => 123456789,
+                'text'    => 'Hello from your bot!',
+            ],
+        ]);
 ```
 **Get data in bot**
 ```php
@@ -351,7 +351,7 @@ Route::add('sendMessage', [ HomeController::class, 'sendMessage' ]);
 
 // in HomeController.php
 public function sendMessage( Request $request ) {
-bot::sendMessage($request->request->chat_id, $request->request->text);
+    bot::sendMessage($request->request->chat_id, $request->request->text);
 }
 ```
 **Notes**
