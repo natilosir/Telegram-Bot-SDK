@@ -321,6 +321,45 @@ class StartController {
 - `new_chat_member`: The updated chat member state.
 - `invite_link`: The invite link used for chat join requests.
 
+### Sending a request via laravel to bot
+To send a request using the bot endpoint, make a POST request to Webhook URL with a JSON payload
+#### Request Format
+
+Your request must include:
+
+A `route` field specifying the action (e.g., `sendMessage`)
+A `data` object containing the required parameters for that route
+**Example (using Laravel `HTTP` client):**
+
+```php
+use Illuminate\Support\Facades\Http;
+
+$response = Http::timeout(10)
+->asJson()
+->post("https://Webhook.com", [
+'route' => 'sendMessage',
+'data'  => [
+'chat_id' => 123456789,
+'text'    => 'Hello from your bot!',
+],
+]);
+```
+**Get data in bot**
+```php
+// in route.php
+Route::add('sendMessage', [ HomeController::class, 'sendMessage' ]);
+
+// in HomeController.php
+public function sendMessage( Request $request ) {
+bot::sendMessage($request->request->chat_id, $request->request->text);
+}
+```
+**Notes**
+The request must be sent as JSON (`Content-Type: application/json`).
+Replace `sendMessage` and `chat_id` and `text` with your actual values.
+
+
+
 ### Key Methods
 
 1. **`getInput(): string`**
@@ -376,7 +415,7 @@ class StartController {
 
 8. **`dd(): string` and `lg(): string`**
   - **Description**: Debugging methods that call external `dd` or `lg` functions with the request’s array representation.
-  - **Note**: Requires `dd` and `lg` functions to be defined.
+- **Note**: Requires `dd` and `lg` functions to be defined.
 
 ## Http::Class
 
