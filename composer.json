@@ -10,7 +10,11 @@
   ],
   "require": {
     "php": ">=8.0",
-    "natilosir/jalali": "^1.0",
+	"ext-pdo": "*",
+	"ext-curl": "*",
+	"illuminate/http": "^13.0",
+	"illuminate/database": "^13.0",
+    "natilosir/verta": "^1.0",
     "natilosir/bot": "^1.0",
     "natilosir/orm": "^1.0"
   },
